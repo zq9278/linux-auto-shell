@@ -1,28 +1,29 @@
 #!/bin/bash
-
-# 检查是否在Docker中运行
-if [ -f /.dockerenv ] || [ "$(basename "$(cat /proc/1/cpuset)")" == "docker" ]; then
-    SUDO=""
-    echo "当前在 Docker 中运行"
-else
-    SUDO="sudo"
-    echo "当前在宿主机中运行"
-fi
+###
+ # @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
+ # @Date: 2024-09-29 14:34:38
+ # @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
+ # @LastEditTime: 2024-09-29 14:44:37
+ # @FilePath: \linux-auto-shell\docker-auto-ssh.sh
+ # @Description: 
+ # 
+ # Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
+### 
 
 # 更新包列表并安装SSH
 echo "正在更新包列表..."
-$SUDO apt-get update && echo "更新完成！" || { echo "更新失败！"; exit 1; }
+apt-get update && echo "更新完成！" || { echo "更新失败！"; exit 1; }
 echo "正在安装SSH..."
-$SUDO apt-get install -y ssh && echo "SSH安装完成！" || { echo "SSH安装失败！"; exit 1; }
-$SUDO apt-get install -y vim && echo "Vim安装完成！" || { echo "Vim安装失败！"; exit 1; }
+apt-get install -y ssh && echo "SSH安装完成！" || { echo "SSH安装失败！"; exit 1; }
+apt-get install -y vim && echo "Vim安装完成！" || { echo "Vim安装失败！"; exit 1; }
 
 # 修改sshd_config文件
 echo "正在修改sshd_config文件..."
-$SUDO sed -i.bak 's/^#*PermitRootLogin .*/PermitRootLogin yes/' /etc/ssh/sshd_config && echo "sshd_config文件修改完成！" || { echo "修改失败！"; exit 1; }
+sed -i.bak 's/^#*PermitRootLogin .*/PermitRootLogin yes/' /etc/ssh/sshd_config && echo "sshd_config文件修改完成！" || { echo "修改失败！"; exit 1; }
 
 # 创建.ssh目录
 echo "正在创建.ssh目录..."
-$SUDO mkdir -p ~/.ssh && $SUDO chmod 700 ~/.ssh && echo ".ssh目录创建完成！" || { echo "创建.ssh目录失败！"; exit 1; }
+mkdir -p ~/.ssh && chmod 700 ~/.ssh && echo ".ssh目录创建完成！" || { echo "创建.ssh目录失败！"; exit 1; }
 
 # 添加公钥到authorized_keys
 echo "正在添加公钥到authorized_keys..."
@@ -34,14 +35,13 @@ fi
 
 # 设置authorized_keys权限
 echo "正在设置authorized_keys权限..."
-$SUDO chmod 600 ~/.ssh/authorized_keys && echo "权限设置完成！" || { echo "权限设置失败！"; exit 1; }
+chmod 600 ~/.ssh/authorized_keys && echo "权限设置完成！" || { echo "权限设置失败！"; exit 1; }
 
-# 重启SSH服务
-echo "正在重启SSH服务..."
-$SUDO service ssh start && echo "SSH服务重启完成！" || { echo "重启失败！"; exit 1; }
+# 启动SSH服务
+echo "正在启动SSH服务..."
+service ssh start && echo "SSH服务重启完成！" || { echo "重启失败！"; exit 1; }
 
 # 在.bashrc末尾添加如下代码
-echo "service ssh start" | $SUDO tee -a /root/.bashrc
-echo "SSH服务启动命令已添加到.bashrc末尾！"
+echo "service ssh start" | tee -a /root/.bashrc
 
 echo "SSH安装和配置全部完成！"
