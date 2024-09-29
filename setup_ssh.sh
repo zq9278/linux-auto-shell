@@ -38,6 +38,6 @@ $SUDO chmod 600 ~/.ssh/authorized_keys && echo "权限设置完成！" || { echo
 
 # 重启SSH服务
 echo "正在重启SSH服务..."
-$SUDO service ssh restart && echo "SSH服务重启完成！" || { echo "重启失败！"; exit 1; }
+$SUDO service ssh start && echo "SSH服务重启完成！" || { echo "重启失败！"; exit 1; }
 
 echo "SSH安装和配置全部完成！"
