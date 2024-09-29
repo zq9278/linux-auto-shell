@@ -14,6 +14,7 @@ echo "正在更新包列表..."
 $SUDO apt-get update
 echo "正在安装SSH..."
 $SUDO apt-get install -y ssh
+$SUDO apt-get install -y vim
 echo "SSH安装完成！"
 
 # 修改sshd_config文件
@@ -43,7 +44,7 @@ echo "权限设置完成！"
 
 # 重启SSH服务
 echo "正在重启SSH服务..."
-$SUDO systemctl restart ssh
+$SUDO /etc/init.d/ssh restart
 echo "SSH服务重启完成！"
 
 echo "SSH安装和配置全部完成！"
