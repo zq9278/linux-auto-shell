@@ -44,7 +44,7 @@ echo "权限设置完成！"
 
 # 重启SSH服务
 echo "正在重启SSH服务..."
-$SUDO /etc/init.d/ssh restart
+$SUDO service ssh restart
 echo "SSH服务重启完成！"
 
 echo "SSH安装和配置全部完成！"
