@@ -19,3 +19,4 @@ docker 自动安装ssh
 ubuntu 自动安装ssh  
 进入root下执行
 ```bash <(curl -s https://raw.githubusercontent.com/zq9278/linux-auto-shell/main/ubuntu-auto-ssh.sh)```
+bash <(curl -s https://raw.githubusercontent.com/zq9278/linux-auto-shell/main/change-source.sh)
